@@ -1,0 +1,6 @@
+* Abstração = você abstrai os atributos de um fenomeno real. Apenas os necessarios vão para o programa e sua lógica;
+* Encapsulamento = ocultar partes de um objeto e exibir apenas o necessário para uso externo;
+* Herança = passar caracteristicas de um objeto para outro
+  * Uma classe pode ter um construtor que vai ser passado para outras classes, e inclusive os seus métodos serão passados para outras classes
+  * Você usa "extends" tambem para criar heranças
+* Polimorfismo = sobreposição, implemetação de métodos da classe pai de maneira diferente

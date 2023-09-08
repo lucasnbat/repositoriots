@@ -1,0 +1,168 @@
+* TS é um superset do JS, com tipagem estatica, novos recursos e compila para JS puro;
+* Todas as versões do JS são JS (ES5, ES6, ES7...), só tem funcionalidades a mais;
+    * Se for rodar recursos de ES7 em ambiente que só tá com ES6, não funciona;
+    * Se for rodar recursos da versão ES6 em ambiente ES7, aí dá certo;
+* No caso do TS, ele adiciona recursos, mas o ambiente (browser) não suporta ele. Então preciso compilar para JS puro (seja qual for o EcmaScript (5,6,7));
+    * Significa compilar passando por TSC (typescript compiler) Node.js para gerar o JS que vai rodar a aplicação
+    * Podemos inclusive escolher qual versão EcmaScript vou compilar. Posso escrever TS conversando com todos os novos recursos ES7 e depois mandar compilar para JS ES6;
+    * ESNext são recursos novos da linguagem JS que vão ser lançadas ainda
+* No caso de ES7, se o browser suporta, não precisa de compilação;
+* No caso, de TS -> JS, você compila. De ECMA x -> ECMA x-1 você precisa de polifio para fazer downgread
+-------------------------------------------------------------------------------------------------------------------------------------------------
+//tipo de erro padrão do JS puro:
+
+functino multiplyNumbers(x,y){
+    return x* y;
+}
+const result = multiplyNumber (10,[1,2]);
+console.log(result); --> NaN
+
+** Nesse caso, ao receber o array, o JS não vai reclamar, e o erro só vai aparecer no runtime (na hora de executar).
+** Isso é PÉSSIMO se ocorrer em produção.
+
+//agora um código em typescript para você:
+
+function multiplyNumbers(x: number, y: number){
+    return x * y;
+}
+const result = multiplyNumbers(10, [1,2]); --> bem aqui o VScode já vai mostrar um erro indicando que esse segundo argumento não é tipo number
+console.log(result);
+
+**No momento de digitar o codigo os erros ja vai aparecendo (aos moldes Java S2)
+**O arquivo de configuração tsconfig inclusive pode ter especificação para NEM RODAR o código se tiver erro. Ou seja, nem compilar compila.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+* O TS tem recursos que o JS não tem (como interfaces);
+* Todos esses recursos do TS só ficam na camada de código dele, quando compila para JS eles não vão para produção no formato que vc codou em TS;
+* Outros recursos só do TS: public, private, readonly(ou seja, define no constructor e depois o atributo não pode mais ser alterado);
+    * Você consegue criar um tipo específico (por ex, uma variavel type ProgrammingOptions que só aceita Python | Java | PHP) e usar ela para um menu de opções, por exemplo;
+*
+* TS é multiparadigma, vai além de programação Orietnada a Objeto
+
+INSTALANDO TS
+
+* instalando TS via terminal: "npm i typescript -D"
+* tsserver é o que fica rodando o ts toda hora verificando erros de tipagem no codigo
+* tsc é o arquivo que compila os TS para JS
+* Para você transformar o arquivo TS em JS: "npx tsc nomedoarquivo.js"
+* Dois modos de operação do ts:
+    * Script mode: ele trata seus arquivos ts e os arquivos js gerados a partir deles como um unico arquivo JS
+        * Isso que gera erro no caso de você abrir o arquivo ts origem e o js gerado e lá ter as mesmas variveis. ele vai reclamar
+    * Module mode: ocorre quando você exporta alguma constante, variavel, função dentro do seu arquivo ts ou js. Ele sai desse modo scriptmode e passa a agir como modulemode, ou seja, modular, como arquivo independente
+
+TS NODE E CODE RUNNER
+
+* "npm i ts-node" -D ==> "D" indica que será instalada como dependencia de desenvolvimento
+* se vc precisar de configurações de vscode espcifica para um proejto:
+    * Vá dentro da pasta do projeto e crie uma nova pasta chamada '.vscode'
+    * depois você cria um arquivo chamado "settings.json" que vai guardar as config. para esse projeto
+    * as config abrangem zoom do console, cores, extensões, etc.
+    * para usar o coderunner nesse projeto: "code-runner.executorMap"
+        * veja que para cada linguagem tem uma dependencia, algo que compila a linguagem. O TS usa ts-node, a dependencia instalada no inicio da aula;
+    * depois faz ajuste na linha do ts: ""typescript": "npx ts-node --files""
+        * pode usar "--transpile-only" se quiser fazer o ts não fazer checagens e ficacr mais rapido
+        * objetivo é que o coderunner ache o ts, use o ts-node já executando comando npx do terminal.
+        * então: coderunner --> chama engenhoca do npx ts-node --> ts-node ativa o tsc (que é o conversor typescript que faz JS->TS)
+        * dessa forma, vai gerar código em tempo real com coderruner que nem js (como se fosse interpretado)
+* adiantando: "npx tsc -w" é usado pra ficar monitorando os arquivos e as modificações para apontar erros, contantemente
+* Scripts no geral vc configura lá no packtage.json. Se for configurar o code runner compilando usando ts-node apenas nesse projeto, você usa o settings.json na pasta .vscode
+* Vc roda eles com "npm run nomedoscript"
+
+ESLINT (opcional)
+
+* comando terminal: "npm i eslint -D"
+* instalando ferramenta para integrar ts + eslint: "npm i @typescript-eslint/eslint-plugin @typescript-eslint/parser -D"
+    * lembre que -D é para gravar no packtage.json como dependencia de desenvolvimento
+* Aparentemente serve para fazer mais validações e apontar mais erros no código se houver
+
+PRETTIER (opcional)
+
+* serve para ir corringindo automatico alguns erros do codigo
+* npm i prettier
+
+tsconfig
+
+* até agora só configramos coisas para rodar codigo ts mais rapidamente no terminal (code runner, ts-node, configuração .vscode)
+* vamos agora buscar criar o projeto ts em si;
+* como criar um projeto \TS facilmente: 'npx tsc --init';
+* em "lib" voce coloca o que vai usar no projeto. Ex: "lib": ["ESNext", "DOM"]
+* em um mesmo projeto podemos ter arquivos .ts e .js
+* no arquivo tsconfig.json:
+    * target: indica em qual ecmascript vai ser compilado
+    * module: indica qual modulo para compilar ta sendoi usado (ex: commonjs)
+    * lib: bibliotecas (por padrão, ESNext e DOM)
+    * outDir: serve para determinar uma pasta onde você vai receber os arquivos .js
+    (que rodarão em prod) ligados aos arquivos .ts que vc guarda em uma pasta src da vida, por exemplo
+    * strict: config para restringir bastante configurações
+    * esModuleInterop: permite você exportar funções e acessar elas entre arquivos (por meio da sintaxe
+     'export default nome_do_objeto/array/etc')
+* NÃO MEXA NOS ARQUIVOS JS GERADOS. No máximo exclua a pasta quando necessário
+* para recompilar caso modificou algo nos arquivos .ts: 'npx tsc' apenas
+    * Meio que isso é processo final, depois de já ter feito os codigos em ts, gera eles em js e guarda na paste que você colou em outDir no tsconfig.ts
+    * No caso, a pasta destino de todos os arquivos ts que virarão js é a pasta "dist"
+
+INSTALANDO WEBPACK
+
+* é um blunder que une todos os JS gerados a partir do ts para podermos usar no frontend
+* comando terminal: npm i ts-loader webpack webpack-cli --save-dev
+* isso instala ts-loader, o webpack e o webpack-cli no arquvio de config packtage.json
+* Após instalar webpack, crie o arquivo webpack.config.js na raiz do seu projeto;
+* configuração de source map = mapeia os arquivos js gerados pelo webpack para o ts de volta para que eu veja a linha de codigo ts com erros
+  * devtool: 'source-map'
+* Deixe
+  * ( mode: 'development' ) no webpack.config
+* Em 'entry' você vai ver que ele busca um arquivo em src para, a partir desse arquivo inicial, ir importando outros...
+* Além disso, você vera que dentro de 'rules' temos:
+  * test: ele testa todos os arquivos que são .ts ou .tsx (usando expressão regular para achar esses arquivos)
+  * use: usa o ts-loader para carregar o arquivo inicial
+  * exclude: exclui a node_modules para evitar que a gente compile algum programa de terceiros
+*
+* Em "resolve" temos as extensões que serão resolvidas, compiladas
+* Em 'output' temos o arquivo de saida em filename e o caminho da pasta onde esse arquivo vai ficar, que no caso é a dist, assets e js
+* Você verá que depois de configurar o webpack você acaba precisando editar o caminho outDir do tsconfig.
+  * foi configurado outDir como ./dist/assets/js para combinar com o webpack
+* Beleza. Como funciona no geral, então?
+  * Vamos supor que eu só use dist
+  * no tsconfig já ta configurado para vomitar js a partir de ts na dist
+  * colocando dist no webpack ele conversa com o tsconfig e fala: po, blz, os arquivos js ja vao pra la. Deixa eu setar esse caminho até lá como caminho para eu vomitar meu arquivão bundle.js também!
+  * o bundle.js.map é o source map usado como suporte ao ts
+* para chamar webpack: 'npx webpack'
+* para deixar ele monitorando: 'npx webpack -w'
+* dá para criar atalho tambem:
+  * vai no packtage.json coloca dentro do objeto scripts: "dev": "webpack -w"
+    * Assim, ao chamar 'npm run dev' no terminal, você vai ativar o moniotramento do webpack sem precisar do 'npx webpack -w'
+
+RECONFIGURAÇÃO DO ambiente
+
+* Na aula anterior foi feita configuração para projeto onde backend e front estariam todos juntos.
+* Agr vamos fazer eles em modo separado = primeira coisa a definir é que
+  * Criaremos dois arquivos tsconfig.json, um para front outro para backend
+    * O do backend vai ficar apontando para o .dist no outDir
+* Verá que no webpack nos configuramos ele para frontend alterando as "rules" e depois alterando o caminho (path) dentro do objeto output
+* E no webpack pode deixar desse jeito mesmo, não precisa criar copia para backend
+* aogra:
+  * npx webpack -w => compila para frontend
+  * npx tsc => compila para backend
+* Me parece que ele deixou a opção crua para back (npx tsc) e a personlaizada com bundle.js gerado por webpack para o frontend
+* geralmente vc ignora no gitignore o caminho do bundle.js gerado pelo webpack (pois qualquer usauario pode gerar um novo ao baixar seu repositorio)
+
+VALIDANDO FORMULARIOS
+
+* Há bibliotecas que vc importa e elas ja tem os types delas nelas
+* Outras como o validator (validar emails) voce instala ele e depois tem que instalr os tipo separdamente:
+  * npm i validator -> para instalar
+  * npm i @types/nomedoquevcprecisa --> no caso: @types/validator - D ('-D' para instalar como dependencia de desenvolvimento, que não vai para a produção)
+* Instalar o validator parece ser o primeiro passo para você validar formulários (avah)
+
+REVISITANDO TSCONFIG.json
+
+* basicamente:
+  * allowJS = permite importação de arquivos .js dentro de um arquivo .ts
+  * checkJS = aparentemente uma validação de JS que nem a que faz com ts
+  * sourceMap: geração de sourceMap
+  * outFile = criação de bundle com ts sem usar as adaptações que fizemos (sem funcionar com common js ou ESNext)
+    * usamos webpack
+  * rootDir = indicação da pasta raiz do sistema
+  * removeComents = remove comentarios ao gerar saidas
+  * nao vem, mas é bom => noEmitOnError => se tem erro, não compila o código para js
+  * Estranho que em meu tsconfig não tem os decorators...verei depois
+

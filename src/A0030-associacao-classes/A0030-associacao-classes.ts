@@ -1,5 +1,7 @@
 /*eslint-disable*/
 
+//ASSOCIAÇÃO
+
 /*
  * Associação de classes é representada por:
     * Traço sem seta

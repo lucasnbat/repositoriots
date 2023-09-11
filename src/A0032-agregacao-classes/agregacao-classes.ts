@@ -1,5 +1,7 @@
 /*eslint-disable*/
 
+//AGREGAÇÃO
+
 /**
  * Agregação funciona quando uma das classes não faz suas funções principais sem a outra;
  * Ex: carrinho compras e produtos;

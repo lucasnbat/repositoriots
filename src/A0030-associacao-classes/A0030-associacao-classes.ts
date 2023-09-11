@@ -14,7 +14,7 @@ export class Escritor {
   private _ferramenta: Ferramenta | null = null; //ferramenta pode existir ou não (null), ela não é obrigatoria pra escritor exisitr
   constructor(private _nome: string) { }
 
-  get nome() : string{
+  get nome(): string {
     return this._nome;
   }
 
@@ -22,12 +22,12 @@ export class Escritor {
     this._ferramenta = ferramenta;
   }
 
-  get ferramenta(): Ferramenta | null{
+  get ferramenta(): Ferramenta | null {
     return this._ferramenta;
   }
 
   escrever(): void {
-    if(this.ferramenta == null){
+    if (this.ferramenta == null) {
       console.log("Não posso escrever sem ferramenta");
       return;
     }
@@ -57,7 +57,7 @@ export class MaquinaEscrever extends Ferramenta {
   }
 }
 
-const escritor1 = new Escritor ('Lucas');
+const escritor1 = new Escritor('Lucas');
 const caneta1 = new Caneta('Bic');
 const maquinaEscrever1 = new MaquinaEscrever('MaquinaIBM');
 

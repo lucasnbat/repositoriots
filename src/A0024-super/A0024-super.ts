@@ -24,8 +24,8 @@ console.log(p1.getNomeCompleto());
 export class Aluno extends Pessoa {
   public salaAluno: string; //crio o atributo unico do filho
   constructor(nome: string, sobrenome: string, idade: number, cpf: string, salaAluno: string) { //aqui eu to recebendo valores e botando numa caixa fazendo analoigia ao construtor da superclasse
-    super(nome, sobrenome, idade, cpf );  //aqui eu invoco o construtor orignial da super (o que tem todos os this.atributo = atributo, mas que no caso, es~tao escondidos pq usei o atalho do TS para criar classe)
-    this.salaAluno = salaAluno;
+    super(nome, sobrenome, idade, cpf);  //aqui eu invoco o construtor orignial da super (o que tem todos os this.atributo = atributo, mas que no caso, es~tao escondidos pq usei o atalho do TS para criar classe)
+    this.salaAluno = salaAluno; //e aqui eu complemento o construtor original com o novo atributo do aluno
   };
   public getNomeCompleto(): string {
     console.log('[Exemplo de qualquer procedimento feito no metodo do filho e que quero fazer antes do metodo original do pai (classe super)]');

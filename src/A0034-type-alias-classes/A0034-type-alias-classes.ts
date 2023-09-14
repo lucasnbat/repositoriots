@@ -1,16 +1,31 @@
 /*eslint-disable*/
+
+/*
 export abstract class TipoPessoa {
   protected abstract nome: string;
   protected abstract sobrenome: string;
   protected abstract nomeCompleto(): string; //atributo que é uma função e que é do tipo função retornadora de string
 }
+*/
 
-export class Pessoa extends TipoPessoa {
+//usando tipos (type alias)
+type TipoNome = {
+  nome: string;
+};
+
+type TipoSobrenome = {
+  sobrenome: string;
+}
+
+type TipoNomeCompleto = {
+  nomeCompleto: () => string; //atributo que é uma função e que é do tipo função retornadora de string
+}
+
+//implementando o tipo numa nova classe
+export class Pessoa implements TipoNome, TipoSobrenome, TipoNomeCompleto {
 
   //veja que a classe concreta pode ter tipos de atributo diferentes da classe abstrata pessoa -> só não pode fechar mais (no caso, usar private nos atributos)
-  constructor(public nome: string, public sobrenome: string) {
-    super(); //basicamente TS exige pq a classe abstrata PODE ter construtor, então aqui nessa linha vc garante a invocação dele
-  };
+  constructor(public nome: string, public sobrenome: string) { }; //aqui tá public porque os atributos são public no tipo
 
   public nomeCompleto(): string {
     return this.nome + " " + this.sobrenome;

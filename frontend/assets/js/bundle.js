@@ -25,7 +25,7 @@ class VideoPlayer {
     stop() {
     }
     iniciarEventos() {
-        console.log('risos risos');
+        console.log('KKKKKKKKKKKKKK risos');
     }
 }
 exports["default"] = VideoPlayer;

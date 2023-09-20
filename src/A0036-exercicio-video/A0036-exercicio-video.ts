@@ -34,7 +34,7 @@ export default class VideoPlayer implements VideoPlayerProtocol {
 
   }
   iniciarEventos(): void {
-    console.log('risos risos');
+    console.log('KKKKKKKKKKKKKK risos');
   }
 
 }

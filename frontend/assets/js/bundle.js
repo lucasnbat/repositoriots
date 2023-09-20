@@ -6,11 +6,35 @@
 /*!************************************************************!*\
   !*** ./src/A0036-exercicio-video/A0036-exercicio-video.ts ***!
   \************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, exports) => {
 
 
 /*eslint-disable*/
-console.log('Olaaa');
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+class VideoPlayer {
+    //to mandando um grupo de atributos num construtor que formam um elemento chamado videoPlayerElements
+    //ele é de tipo VideoPlayerElements, então possui os 3 atributos private acima
+    //Informados os atributos, eles serão setados no this (que é a classe VideoPlayer) e formará uma nova instância
+    constructor(videoPlayerElements) {
+        this.videoPlayer = videoPlayerElements.videoPlayer;
+        this.playButton = videoPlayerElements.playButton;
+        this.stopButton = videoPlayerElements.stopButton;
+    }
+    playToggle() {
+    }
+    stop() {
+    }
+    iniciarEventos() {
+        console.log('risos risos');
+    }
+}
+exports["default"] = VideoPlayer;
+const novoVideoPlayer = new VideoPlayer({
+    videoPlayer: document.querySelector('.video'),
+    playButton: document.querySelector('.play'),
+    stopButton: document.querySelector('.stop'),
+});
+novoVideoPlayer.iniciarEventos();
 
 
 /***/ })

@@ -20,12 +20,28 @@ class VideoPlayer {
         this.playButton = videoPlayerElements.playButton;
         this.stopButton = videoPlayerElements.stopButton;
     }
+    iniciarEventos() {
+        //arrow function que o this será a classe, se eu usasse function() completa iria ser this = botao
+        this.playButton.addEventListener('click', () => {
+            this.playToggle();
+        });
+        this.stopButton.addEventListener('click', () => {
+            this.videoPlayer.pause(); //ele pausa video
+            this.videoPlayer.currentTime = 0; //e volta video para tempo zero
+            this.playButton.innerText = 'Play';
+        });
+    }
     playToggle() {
+        if (this.videoPlayer.paused) { //se vídeo pausado
+            this.videoPlayer.play(); //o click vai fazer ele rodar
+            this.playButton.innerText = 'Pause'; //e mostrar texto "pausar" para orientar user a ir ali para pausar
+        }
+        else { //se estiver rodando video
+            this.videoPlayer.pause(); //o click vai gerar pausa
+            this.playButton.innerText = 'Play'; //e trocar descrição para play
+        }
     }
     stop() {
-    }
-    iniciarEventos() {
-        console.log('KKKKKKKKKKKKKK risos');
     }
 }
 exports["default"] = VideoPlayer;

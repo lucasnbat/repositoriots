@@ -37,5 +37,5 @@ export class Pessoa {
 
 const pessoa1 = new Pessoa('Winy', 'Zanin', 23, '000111222-22'); //aqui acontece o 1o setter
 pessoa1.sobrenome = 'Risos Risos'; //aqui o 2o setter
-console.log("Imprimindo: " + pessoa1.sobrenome);
+console.log("Imprimindo getter: " + pessoa1.sobrenome);
 

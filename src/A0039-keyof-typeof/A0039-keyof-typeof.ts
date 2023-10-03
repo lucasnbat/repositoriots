@@ -17,6 +17,6 @@ function tradutorCores(cor: CoresChaves, cores: CoresObj) { //passando uma cor e
   //o typeof é para pegar o tipo da constante = se eu quiser pegar o tipo de constCoresObj eu uso typeof constCoresObj
   return cores[cor];
 }
-
+//basicamente agora eu tenho uma lista de chaves possíveis de pesquisar (vermelho, roxo, etc)
 console.log(tradutorCores('roxo', constCoresObj));
 

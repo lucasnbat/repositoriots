@@ -31,7 +31,7 @@ function mostrarNome(objeto: PessoaOuAnimal): void {
       console.log(objeto.nome);
       return;
     case 'animal':
-      console.log('Gagagaga isso é um animal, e um animal '+objeto.cor);
+      console.log('Gagagaga isso é um animal, e um animal ' + objeto.cor);
       return;
   }
 }

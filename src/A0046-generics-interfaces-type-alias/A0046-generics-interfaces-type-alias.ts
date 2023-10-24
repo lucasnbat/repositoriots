@@ -1,13 +1,13 @@
 /*eslint-disable*/
 
 /**********PROTOCOLOS************/
-interface PessoaProtocolo <T, U>{
+interface PessoaProtocolo<T, U> {
   nome: T;
   sobrenome: T;
   idade: U;
 }
 
-interface PessoaProtocolo2 <V = string, X = number>{
+interface PessoaProtocolo2<V = string, X = number> {
   nome: V;
   sobrenome: V;
   idade: X;
@@ -16,13 +16,13 @@ interface PessoaProtocolo2 <V = string, X = number>{
 /**********TESTES************/
 //posso especificar diferentes tipos para cada caso
 //porque to usando GENERICS
-const aluno : PessoaProtocolo<string, number> = {
+const aluno: PessoaProtocolo<string, number> = {
   nome: 'Luiz',
   sobrenome: 'Miranda',
   idade: 30,
 }
 
-const aluno2 : PessoaProtocolo<number, number> = {
+const aluno2: PessoaProtocolo<number, number> = {
   nome: 123,
   sobrenome: 456,
   idade: 30,

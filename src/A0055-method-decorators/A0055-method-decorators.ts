@@ -18,4 +18,12 @@ export class UmaPessoa {
   get nomeCompleto(): string {
     return `${this.nome} ${this.sobrenome}`;
   }
+
+  set nomeCompleto(valor: string) {
+    const palavras = valor.split(/\s+/g);
+    const primeiroNome = palavras.shift();
+    if (!primeiroNome) return;
+    this.nome = primeiroNome;
+    this.sobrenome = palavras.join(' ');
+  }
 }

@@ -28,9 +28,6 @@ function inverteNomeECor(param1: string, param2: string) {
   }
 }
 
-const animal = new Animal('amarelo', 'camaleão');
-console.log(animal);
-
 /*
 decorator isolado
 function outroDecorador(target: Constructor) { //recebendo classe tipo especificado no Constructor
@@ -54,6 +51,7 @@ export class Animal {
   }
 }
 
-
+const animal = new Animal('amarelo', 'camaleão');
+console.log(animal);
 
 

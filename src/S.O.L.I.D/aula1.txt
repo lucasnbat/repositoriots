@@ -1,0 +1,12 @@
+* Single Responsibility Principle - principio responsabilidade única;
+  * Uma classe deve ter apenas um motivo para mudar;
+* Open Closed Principle - principio aberto fechado;
+  * Modulos, classes, objetos e operações devem estar abertos para extensão mas fechados para modificações;
+* Liskov Substituition Principle - principio substituição de Liskov
+  * Subtipos precisam ser substituiveis por seus tipos de base, que originaram;
+* Interface Segregation Principle - principio segregação de einterface
+  * Clientes não devem ser forçados a depender de interfaces que não utilizam;
+* Dependency Inversion Principle - principio de inversão de dependencia
+  * Módulos de alto nível não devem ser dependentes de módulos de baixo nível;
+  * Ambos devem depender de abstrações.
+  * Detalhes devem depender de abstrações, não o inverso;

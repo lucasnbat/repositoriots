@@ -7,3 +7,9 @@ declare namespace _ {
     mul(array: number[]): number;
   }
 }
+
+declare namespace NodeJS { //merge do meu namespace com o namespace do node
+  interface Global {
+    minhaglobal: string;
+  }
+}

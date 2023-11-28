@@ -22,10 +22,10 @@ const aluno: PessoaProtocolo<string, number> = {
   idade: 30,
 }
 
-const aluno2: PessoaProtocolo<number, number> = {
+const aluno2: PessoaProtocolo<number, string> = {
   nome: 123,
   sobrenome: 456,
-  idade: 30,
+  idade: '30',
 }
 
 //veja que aqui não precisei especificar ao instanciar
